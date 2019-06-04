@@ -3,7 +3,7 @@ using BlazorBoilerplate.Client.Services.Implementations;
 using BlazorBoilerplate.Client.States;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Blazored.LocalStorage;
+//using Blazored.LocalStorage;
 using Sotsera.Blazor.Toaster.Core.Models;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
@@ -16,7 +16,7 @@ namespace BlazorBoilerplate.Client
             services.AddScoped<AuthenticationState>();
             services.AddScoped<IAuthorizeApi, AuthorizeApi>();
 
-            services.AddBlazoredLocalStorage();
+            //services.AddBlazoredLocalStorage();
             services.AddLoadingBar();
 
             services.AddToaster(config =>

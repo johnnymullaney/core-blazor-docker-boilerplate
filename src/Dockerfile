@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:3.0-sdk AS build-env
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build-env
 WORKDIR /app
 
 # Copy csproj and restore as distinct layers
@@ -12,13 +12,13 @@ RUN dotnet restore
 # Copy everything else and build
 COPY . .
 WORKDIR /src/BlazorBoilerplate.Server
-RUN dotnet build -c Release -o /app
+RUN dotnet build  -c Release -o /app
 
-FROM build-env AS publish
-RUN dotnet publish -c Release -o /app
+WORKDIR /app
+RUN dotnet publish  -c Release -o /app
 
 # Build runtime image
-FROM microsoft/dotnet:aspnetcore-runtime
+FROM mcr.microsoft.com/dotnet/core/runtime:3.0 AS runtime
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=build-env /app ./
 ENTRYPOINT ["dotnet", "blazorboilerplate.server.dll"]
